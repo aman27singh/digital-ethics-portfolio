@@ -4,7 +4,7 @@ const cases = {
     title: 'Generative AI Digital Ethics Portfolio',
     lede: 'A 2-member group digital ethics portfolio examining synthetic reality, deepfakes, authorship, AI in warfare, tacit collusion, Khanmigo auditing, and global AI governance.',
     tags: ['Aman & Anushka', 'CIA 3 Component 2', 'Unit 5', 'Generative AI', 'Group Portfolio'],
-    original: 'originals/CIA-3 Component-2 (1).pdf',
+    original: 'originals/digital-ethics-portfolio-report.pdf',
     contextTitle: 'Truth, creativity, and the global ethical order',
     context: 'Developed for Unit 5 of Responsible AI (5BTCS B) by Aman (2460324) and Anushka Tater (2460336). The portfolio synthesizes creative artifacts (posters, infographics, responsible AI guidelines, awareness material) and critical ethical evaluations of Generative AI technologies across media, governance, autonomous weapons, and educational tools.',
     questionTitle: 'How can Generative AI be deployed responsibly without eroding epistemic truth, human agency, or global North–South equity?',
@@ -176,10 +176,22 @@ document.querySelector('#case-title').textContent = selected.title;
 document.querySelector('#case-lede').textContent = selected.lede;
 document.querySelector('#case-meta').innerHTML = selected.tags.map((tag) => `<span>${tag}</span>`).join('');
 if (selected.original) {
-  document.querySelector('#original-link').href = `original-viewer.html?file=${encodeURIComponent(selected.original)}`;
+  const origLink = document.querySelector('#original-link');
+  if (origLink) {
+    origLink.href = `original-viewer.html?file=${encodeURIComponent(selected.original)}`;
+    origLink.style.display = 'inline-flex';
+  }
+  const downloadLink = document.querySelector('#download-link');
+  if (downloadLink) {
+    downloadLink.href = selected.original;
+    downloadLink.download = selected.original.split('/').pop();
+    downloadLink.style.display = 'inline-flex';
+  }
 } else {
-  document.querySelector('#original-link').hidden = true;
-  document.querySelector('#original-link').style.display = 'none';
+  const origLink = document.querySelector('#original-link');
+  if (origLink) origLink.style.display = 'none';
+  const downloadLink = document.querySelector('#download-link');
+  if (downloadLink) downloadLink.style.display = 'none';
 }
 document.querySelector('#context-title').textContent = selected.contextTitle;
 document.querySelector('#context').textContent = selected.context;

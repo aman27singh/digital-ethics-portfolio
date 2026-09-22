@@ -20,8 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const openProject = () => {
       window.open(`project.html?case=${card.dataset.project}`, '_blank');
     };
-    card.addEventListener('click', openProject);
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('a')) return;
+      openProject();
+    });
     card.addEventListener('keydown', (event) => {
+      if (event.target.closest('a')) return;
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         openProject();
