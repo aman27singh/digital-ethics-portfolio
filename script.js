@@ -28,3 +28,28 @@ projectCards.forEach((card) => {
     }
   });
 });
+
+// Category Filter Functionality
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+
+    projectCards.forEach((card) => {
+      const author = card.dataset.author;
+      if (filter === 'all') {
+        card.style.display = 'flex';
+      } else if (filter === 'joint' && author === 'joint') {
+        card.style.display = 'flex';
+      } else if (filter === 'aman' && (author === 'aman' || author === 'joint')) {
+        card.style.display = 'flex';
+      } else if (filter === 'anushka' && (author === 'anushka' || author === 'joint')) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
